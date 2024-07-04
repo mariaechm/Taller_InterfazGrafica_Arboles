@@ -6,7 +6,7 @@ package controlador.TDA.listas.exception;
 
 /**
  *
- * @author sebastian
+ * @author jossibel Perez
  */
 public class LlenoException extends Exception {
 
