@@ -8,6 +8,6 @@ package contratador.TDA.listas.exception;
  *
  * @author Anahi Perez
  */
-public class llenoException {
+public class LlenoException {
     
 }
