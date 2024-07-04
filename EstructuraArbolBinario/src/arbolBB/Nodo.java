@@ -7,7 +7,7 @@ package arbolBB;
 
 /**
  *
- * @author Toloza XD
+ * @author Isauro Rivera., Josiibel Perez, Maria Chuico
  */
 public class Nodo {
     private int dato;

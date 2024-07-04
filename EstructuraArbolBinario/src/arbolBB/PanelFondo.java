@@ -1,7 +1,8 @@
 package arbolBB;
 /**
  *
- * @author ploks
+ * @author Isauro Rivera., Josiibel Perez, Maria Chuico
+
  */
 import java.awt.Dimension;
 import java.awt.Graphics;
