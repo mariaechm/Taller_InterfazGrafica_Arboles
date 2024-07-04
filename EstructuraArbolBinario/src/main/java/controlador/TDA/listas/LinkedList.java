@@ -8,7 +8,7 @@ import controlador.TDA.listas.exception.VacioException;
 
 /**
  *
- * @author sebastian
+ * @author jossibel Perez
  */
 public class LinkedList <E> {
     private Nodo<E> head;

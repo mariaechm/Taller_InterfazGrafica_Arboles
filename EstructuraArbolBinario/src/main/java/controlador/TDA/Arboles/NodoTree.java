@@ -6,7 +6,7 @@ package controlador.TDA.Arboles;
 
 /**
  *
- * @author sakotaz
+ * @author jossibel Perez
  */
 public class NodoTree <E> {
     private NodoTree father;

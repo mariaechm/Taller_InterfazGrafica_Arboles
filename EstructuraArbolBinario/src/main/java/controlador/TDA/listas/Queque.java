@@ -9,7 +9,7 @@ import controlador.TDA.listas.exception.VacioException;
 
 /**
  *
- * @author sebastian
+ * @author jossibel Perez
  */
 public class Queque<E> {
     private QuequeOperation<E> quequeOperation;

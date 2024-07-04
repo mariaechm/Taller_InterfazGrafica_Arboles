@@ -6,7 +6,7 @@ package controlador.TDA.listas;
 
 /**
  *
- * @author sebastian
+ * @author jossibel Perez
  */
 public class Nodo <E> {
     private E data;

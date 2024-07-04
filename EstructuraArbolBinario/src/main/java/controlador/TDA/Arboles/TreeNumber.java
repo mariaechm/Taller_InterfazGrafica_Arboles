@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 /**
  *
- * @author sakotaz
+ * @author jossibel Perez
  */
 public class TreeNumber {
     private NodoTree <Integer> root;
