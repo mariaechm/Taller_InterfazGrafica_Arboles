@@ -1,4 +1,3 @@
-
 package arbolBB;
 
 import java.util.ArrayList;
@@ -17,25 +16,30 @@ public class SimuladorArbolBinario {
     }
 
     public boolean insertar(Integer dato) {
-        return (this.miArbol.agregar(dato));
+        return this.miArbol.agregar(dato);
     }
-    //metodo para mostrar los recorridos del arbol
+
+    public boolean eliminar(Integer dato) {
+        return this.miArbol.eliminar(dato);
+    }
+
+    // Metodo para mostrar los recorridos del arbol
     public String preOrden() {
         LinkedList it = this.miArbol.preOrden();
-        return (recorrido(it, "Recorrido PreOrden"));
+        return recorrido(it, "Recorrido PreOrden");
     }
 
     public String inOrden() {
         LinkedList it = this.miArbol.inOrden();
-        return (recorrido(it, "Recorrido InOrden"));
+        return recorrido(it, "Recorrido InOrden");
     }
 
     public String postOrden() {
         LinkedList it = this.miArbol.postOrden();
-        return (recorrido(it, "Recorrido PosOrden"));
+        return recorrido(it, "Recorrido PosOrden");
     }
-    
-    //metodo para poder mostrar los tipos d recorrido
+
+    // Metodo para poder mostrar los tipos de recorrido
     private String recorrido(LinkedList it, String msg) {
         int i = 0;
         String r = msg + "\n";
@@ -43,16 +47,15 @@ public class SimuladorArbolBinario {
             r += "\t" + it.get(i).toString() + "";
             i++;
         }
-        return (r);
+        return r;
     }
-    
-    
-    //Metodo para buscar dato en el nodo
+
+    // Metodo para buscar dato en el nodo
     public String buscar(Integer dato) {
         boolean siEsta = this.miArbol.existe(dato);
-        String r = "El dato:" + dato.toString() + "\n";
+        String r = "El dato: " + dato.toString() + "\n";
         r += siEsta ? "Si se encuentra en el arbol" : "No se encuentra en el arbol";
-        return (r);
+        return r;
     }
 
     public JPanel getDibujo() {
