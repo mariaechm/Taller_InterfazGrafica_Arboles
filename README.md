@@ -4,13 +4,13 @@ En el presente repositorio se encuentra el codigo de una interfaz interfaz gráf
 permite el ingreso de numeros los cuales postiormente se mostrarn en un representacion grafica formando un arbol binario
 de búsqueda, ademas permite eliminar el nodo y se puede seleccionar recorrido preorden, inorden y postorden.
 
-# Ingreso de numeros
+# Ingreso de números
 ![image](https://github.com/mariaechm/Taller_InterfazGrafica_Arboles/assets/166523237/51d29970-02b6-46b3-b98b-74b723f08a62)
 
 Si se ingresar un valor que no sea numero, no se ingresa el valor.
 ![image](https://github.com/mariaechm/Taller_InterfazGrafica_Arboles/assets/166523237/df16d285-1284-4944-ae06-1b316b597c6f)
 
-# Grafica de arbol
+# Gráfica de árbol
 ![image](https://github.com/mariaechm/Taller_InterfazGrafica_Arboles/assets/166523237/8b436598-34d1-4e8b-9c13-e6af46eb8de9)
 
 # Recorrido
@@ -18,6 +18,7 @@ Si se ingresar un valor que no sea numero, no se ingresa el valor.
 
 Para continuar y visualizar todos los numeros que se muestran en cualquiera de los recorridos se mantiene presionada la 
 barra sea inferior o de la derecha.
+
 ![image](https://github.com/mariaechm/Taller_InterfazGrafica_Arboles/assets/166523237/69b521ce-1d16-47c2-992b-891b8bf231de)
 
 # Link del repositorio:
