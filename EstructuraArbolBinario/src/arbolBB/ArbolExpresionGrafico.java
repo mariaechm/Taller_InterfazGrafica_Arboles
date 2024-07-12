@@ -14,7 +14,8 @@ public class ArbolExpresionGrafico extends JPanel
     private int parent2child = 20, child2child = 30;
     private Dimension empty = new Dimension(0,0);
     private FontMetrics fm = null;
-    
+    private int orden = 1;
+
     /**
      * Constructor de la clase ArbolExpresionGrafico.
      * El constructor permite inicializar los atributos de la clase ArbolExpresionGrafico
@@ -41,7 +42,7 @@ public class ArbolExpresionGrafico extends JPanel
         posicionNodos.clear();
         subtreeSizes.clear();
         Nodo root = this.miArbol.getRaiz();
-        if (root != null) 
+        if (root!= null) 
         {
             calcularTamañoSubarbol(root);
             calcularPosicion(root, Integer.MAX_VALUE, Integer.MAX_VALUE, 0);
@@ -84,59 +85,81 @@ public class ArbolExpresionGrafico extends JPanel
      * @param top: int con el tope.
      */
     private void calcularPosicion(Nodo n, int left, int right, int top) 
-{
-    if (n == null) 
-        return;
+    {
+        if (n == null) 
+            return;
 
-    Dimension ld = subtreeSizes.getOrDefault(n.getIzq(), empty);
-    Dimension rd = subtreeSizes.getOrDefault(n.getDer(), empty);
+        Dimension ld = subtreeSizes.getOrDefault(n.getIzq(), empty);
+        Dimension rd = subtreeSizes.getOrDefault(n.getDer(), empty);
 
-    int center = 0;
+        int center = 0;
 
-    if (right != Integer.MAX_VALUE)
-        center = right - rd.width - child2child / 2;
-    else if (left != Integer.MAX_VALUE)
-        center = left + ld.width + child2child / 2;
+        if (right!= Integer.MAX_VALUE)
+            center = right - rd.width - child2child / 2;
+        else if (left!= Integer.MAX_VALUE)
+            center = left + ld.width + child2child / 2;
 
-    int width = fm.stringWidth(n.getDato()+"");
+        int width = fm.stringWidth(n.getDato()+"");
 
-    // Ajustar el tamaño del círculo para que no sobrepase los vértices
-    int circleRadius = Math.max(width, fm.getHeight()) / 2 + 2; // Reducir el +10 a +2
+        // Ajustar el tamaño del círculo para que no sobrepase los vértices
+        int circleRadius = Math.max(width, fm.getHeight()) / 2 + 2; // Reducir el +10 a +2
 
-    Ellipse2D circle = new Ellipse2D.Double(center - circleRadius, top, 2 * circleRadius, 2 * circleRadius);
+        Ellipse2D circle = new Ellipse2D.Double(center - circleRadius, top, 2 * circleRadius, 2 * circleRadius);
 
-    posicionNodos.put(n, circle);
+        posicionNodos.put(n, circle);
 
-    calcularPosicion(n.getIzq(), Integer.MAX_VALUE, center - child2child / 2, top + 2 * circleRadius + parent2child);
-    calcularPosicion(n.getDer(), center + child2child / 2, Integer.MAX_VALUE, top + 2 * circleRadius + parent2child);
-}
-
-private void dibujarArbol(Graphics2D g, Nodo n, int puntox, int puntoy, int yoffs) 
-{
-    if (n == null) 
-        return;
-
-    Ellipse2D circle = posicionNodos.get(n);
-    g.draw(circle);
-    g.drawString(n.getDato()+"", 
-        (int)(circle.getX() + circle.getWidth() / 2 - fm.stringWidth(n.getDato()+"") / 2), 
-        (int)(circle.getY() + circle.getHeight() / 2 + fm.getHeight() / 4));
-
-    int centerX = (int) (circle.getX() + circle.getWidth() / 2);
-    int centerY = (int) (circle.getY() + circle.getHeight() / 2);
-    int radius = (int) (circle.getWidth() / 2);
-
-    if (puntox != Integer.MAX_VALUE) {
-        double angle = Math.atan2(centerY - puntoy, centerX - puntox);
-        int startX = (int) (centerX - radius * Math.cos(angle));
-        int startY = (int) (centerY - radius * Math.sin(angle));
-        g.drawLine(puntox, puntoy, startX, startY);
+        calcularPosicion(n.getIzq(), Integer.MAX_VALUE, center - child2child / 2, top + 2 * circleRadius + parent2child);
+        calcularPosicion(n.getDer(), center + child2child / 2, Integer.MAX_VALUE, top + 2 * circleRadius + parent2child);
     }
 
-    dibujarArbol(g, n.getIzq(), centerX, centerY + radius, yoffs);
-    dibujarArbol(g, n.getDer(), centerX, centerY + radius, yoffs);
-}
+    /**
+     * Método para dibujar el árbol en el panel.
+     * @param g: Objeto de la clase Graphics2D.
+     * @param n: Nodo actual del árbol.
+     * @param puntox: Coordenada x del nodo padre.
+     * @param puntoy: Coordenada y del nodo padre.
+     * @param yoffs: Desplazamiento vertical.
+     */
+    private void dibujarArbol(Graphics2D g, Nodo n, int puntox, int puntoy, int yoffs) 
+    {
+        if (n == null) 
+            return;
 
+        Ellipse2D circle = posicionNodos.get(n);
+
+        // Dibujar el borde del círculo
+        g.setColor(Color.BLACK);
+        g.draw(circle);
+
+        // Rellenar el círculo con color
+        g.setColor(Color.CYAN); // Cambia el color según tu preferencia
+        g.fill(circle);
+
+        // Dibujar el texto del nodo
+        g.setColor(Color.BLACK);
+        g.drawString(n.getDato()+"", 
+            (int)(circle.getX() + circle.getWidth() / 2 - fm.stringWidth(n.getDato()+"") / 2), 
+            (int)(circle.getY() + circle.getHeight() / 2 + fm.getHeight() / 4));
+
+        // Dibujar el orden del nodo
+        g.drawString(String.valueOf(orden++), 
+            (int)(circle.getX() + circle.getWidth() / 2 - fm.stringWidth(String.valueOf(orden-1)) / 2), 
+            (int)(circle.getY() - fm.getHeight() / 2));
+
+        int centerX = (int) (circle.getX() + circle.getWidth() / 2);
+        int centerY = (int) (circle.getY() + circle.getHeight() / 2);
+        int radius = (int) (circle.getWidth() / 2);
+
+        if (puntox!= Integer.MAX_VALUE) {
+            double angle = Math.atan2(centerY - puntoy, centerX - puntox);
+            int startX = (int) (centerX - radius * Math.cos(angle));
+            int startY = (int) (centerY - radius * Math.sin(angle));
+            g.drawLine(puntox, puntoy, startX, startY);
+        }
+
+        dibujarArbol(g, n.getIzq(), centerX, centerY + radius, yoffs);
+        dibujarArbol(g, n.getDer(), centerX, centerY + radius, yoffs);
+    }
 
     /**
      * Sobreescribe el método paint y se encarga de pintar todo el árbol.
@@ -156,6 +179,7 @@ private void dibujarArbol(Graphics2D g, Nodo n, int puntox, int puntoy, int yoff
         
         Graphics2D g2d = (Graphics2D) g;
         g2d.translate(getWidth() / 2, parent2child);
+        orden = 1; // Resetear el orden antes de dibujar el árbol
         dibujarArbol(g2d, this.miArbol.getRaiz(), Integer.MAX_VALUE, Integer.MAX_VALUE, fm.getLeading() + fm.getAscent());
         fm = null;
     }
